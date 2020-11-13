@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--配置SqlSessionFactoryBean-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--指定数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--指定加载mybatis核心文件，或直接在当前配置文件中写-->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <!--若映射文件和mapper接口未在同一包中-->
+        <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+    </bean>
+    <!--扫描加载映射文件，要求映射文件和mapper接口在用同名包中-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定用于生产mapper代理类的工厂-->
+        <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
+        <!--指定轻奢文件所在接口包名-->
+        <property name="basePackage" value="com.yaorange.mapper"/>
+    </bean>
+
+</beans>

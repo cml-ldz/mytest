@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaorange.mapper.UserMapper">
+    <insert id="addUser" parameterType="User">
+        INSERT INTO tb_user(user_name, password, name, age, sex, birthday, note, created, updated)
+        VALUES (#{userName}, #{password}, #{name}, #{age}, #{sex}, #{birthday}, #{note}, #{created}, #{updated})
+    </insert>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE tb_user
+    SET
+    user_name=#{userName},
+    password=#{password},
+    name=#{name},
+    age=#{age},
+    sex=#{sex},
+    birthday=#{birthday},
+    note=#{note},
+    updated=#{updated}
+    WHERE id = #{id}
+    </update>
+    <delete id="deleteUser">
+        DELETE FROM tb_user WHERE id = #{id}
+    </delete>
+
+    <select id="findALl" resultType="User">
+        select * from tb_user
+    </select>
+</mapper>
